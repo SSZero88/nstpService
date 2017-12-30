@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  p= error
+  each playerstatus in healthstatus
+      div
+        h1 #{playerstatus.player.name}
+      div
+        p Force Field
+        progress(data-label='#{playerstatus.forcefield.current} / #{playerstatus.forcefield.max}', class='forcefield', value=playerstatus.forcefield.percent, max=100)
+      div
+        p Stamina
+        progress(data-label='#{playerstatus.stamina.current} / #{playerstatus.stamina.max}',class='stamina', value=playerstatus.stamina.percent, max=100)
+      div
+        p Health Points
+        progress(data-label='#{playerstatus.hp.current} / #{playerstatus.hp.max}',class='hp', value=playerstatus.hp.percent, max=100)
+      div
+        p Resolve
+        progress(data-label='#{playerstatus.resolve.current} / #{playerstatus.resolve.max}',class='resolve', value=playerstatus.resolve.percent, max=100)
+    script(type="text/javascript").
+        window.setTimeout("window.location.reload(true);", 5000);
+
+
+

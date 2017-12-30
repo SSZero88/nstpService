@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  h1= title
+  p(class='error')= error
+  p(class='success')= message
+  form(id='playerform', method='post')
+    table
+      thead
+        tr.head
+          th Player
+          th Character
+          th Forcefield
+          th Stamina
+          th HP
+          th Resolve
+      tbody
+        each player, i in players
+          tr()
+            td #{player.name}
+              input(type='hidden' name="player[#{i}][name]", value="#{player.character.name}")
+              input(type='hidden' name="player[#{i}][id]", value="#{player.character.id}")
+            td #{player.character.name}
+            td
+              input(name="player[#{i}][current_forcefield]", type='number', value=player.character.current_forcefield)
+            td
+              input(name="player[#{i}][current_stamina]", type='number', value=player.character.current_stamina)
+            td
+              input(name="player[#{i}][current_hp]", type='number', value=player.character.current_hp)
+            td
+              input(name="player[#{i}][current_resolve]", type='number', value=player.character.current_resolve)
+    p
+    input(id='submit', type='submit' value='Submit' class='myButton')
+    script(src='/jquery/jquery.js')
+    script(type="text/javascript").
+        $('#playerform').submit(function(){
+              $('#submit').attr('disabled', 'disabled');
+              $('#playerform input').attr('readonly', 'readonly');
+              return true;
+            }
+        )
+
