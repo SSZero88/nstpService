@@ -53,6 +53,7 @@ router.get('/healthbars', function(req, res, next) {
     });
 });
 
+/* POST /players/<id>/status - restful service that updates player status. To be used by external integrations */
 router.post('/:id/status', function(req, res, next) {
     var id = req.params.id;
     var status = req.body;
