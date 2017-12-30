@@ -1,4 +1,8 @@
 module.exports = {
+    /**
+     * Gets the current player status.
+     * @param callback
+     */
     getPlayerStatus: function(callback){
         var players = [];
         connection.query('CALL getCharacterStatus();', (err, result) => {
@@ -37,6 +41,11 @@ module.exports = {
         });
     },
 
+    /***
+     * Updates current player status.
+     * @param status
+     * @param callback
+     */
     updatePlayerStatus: function(status, callback){
         connection.query('CALL updateCharacterStatus(?,?,?,?,?);',
             [

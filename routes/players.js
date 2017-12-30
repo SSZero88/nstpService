@@ -2,13 +2,14 @@ var express = require('express');
 var router = express.Router();
 var playerDataAccess = require('../dataaccess/players');
 
-/* GET users listing. */
+/* GET players status. Returns JSON, to be used with external integrations */
 router.get('/', function(req, res, next) {
     playerDataAccess.getPlayerStatus((players) => {
         res.send(players);
     });
 });
 
+/* GET /players/healthbars - a web page displaying all users' statuses. */
 router.get('/healthbars', function(req, res, next) {
 
     function getPercent(max, current){
