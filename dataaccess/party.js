@@ -19,6 +19,7 @@ module.exports = {
                 id: curr.id,
                 current_xp: curr.current_xp,
                 next_xp: curr.next,
+                prev_xp: curr.prev,
                 level: curr.level
             };
 

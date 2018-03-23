@@ -47,7 +47,7 @@ router.get('/healthbars', function(req, res, next) {
 
 router.get('/experience', function(req, res, next) {
     partyDataAccess.getPartyStatus((party) => {
-        party.percent = getPercent(party.next_xp, party.current_xp);
+        party.percent = getPercent(party.next_xp - party.prev_xp, party.current_xp - party.prev_xp);
         res.render("experience", {title: "Party Experience", party: party});
     });
 });
