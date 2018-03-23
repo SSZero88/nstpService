@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var playerDataAccess = require('../dataaccess/players');
-
+var partyDataAccess = require('../dataaccess/party');
 /* GET players status. Returns JSON, to be used with external integrations */
 router.get('/', function(req, res, next) {
     playerDataAccess.getPlayerStatus((players) => {
@@ -11,14 +11,6 @@ router.get('/', function(req, res, next) {
 
 /* GET /players/healthbars - a web page displaying all users' statuses. */
 router.get('/healthbars', function(req, res, next) {
-
-    function getPercent(max, current){
-        if(max===0){
-            return 0;
-        }
-        return Math.floor((current/max)*100)
-    }
-
     playerDataAccess.getPlayerStatus((players) => {
         var healthstatus = [];
         for(var i in players){
@@ -53,6 +45,13 @@ router.get('/healthbars', function(req, res, next) {
     });
 });
 
+router.get('/experience', function(req, res, next) {
+    partyDataAccess.getPartyStatus((party) => {
+        party.percent = getPercent(party.next_xp, party.current_xp);
+        res.render("experience", {title: "Party Experience", party: party});
+    });
+});
+
 /* POST /players/<id>/status - restful service that updates player status. To be used by external integrations */
 router.post('/:id/status', function(req, res, next) {
     var id = req.params.id;
@@ -67,5 +66,12 @@ router.post('/:id/status', function(req, res, next) {
         res.send();
     });
 });
+
+function getPercent(max, current){
+    if(max===0){
+        return 0;
+    }
+    return Math.floor((current/max)*100)
+}
 
 module.exports = router;

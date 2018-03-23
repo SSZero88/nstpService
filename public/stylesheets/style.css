@@ -23,6 +23,7 @@ table {
   width: 640px;
   border-collapse:
           collapse; border-spacing: 0;
+  border: 1px solid #333333 !important;
   margin: 0 auto;
 }
 
@@ -44,6 +45,11 @@ td {
 
 td input {
   width: 30px;
+  text-align: center;
+}
+
+td input.xp  {
+  width: 100px;
   text-align: center;
 }
 
@@ -172,10 +178,17 @@ progress.forcefield::-webkit-progress-value {
 progress.resolve::-webkit-progress-value {
   border-radius: 50px;
   box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+  background: -webkit-linear-gradient(45deg, transparent, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%),
+  -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)),
+  -webkit-linear-gradient(left, #97332c, #c4341c);
+}
+progress.xp::-webkit-progress-value {
+  border-radius: 50px;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
   background:
           -webkit-linear-gradient(45deg, transparent, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%),
           -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)),
-          -webkit-linear-gradient(left, #97332c, #c4341c);
+          -webkit-linear-gradient(left, #baa522, #c4c318);
 
   /* Looks great, now animating it */
   background-size: 25px 14px, 100% 100%, 100% 100%;

@@ -31,12 +31,41 @@ block content
               input(name="player[#{i}][current_resolve]", type='number', value=player.character.current_resolve)
     p
     input(id='submit', type='submit' value='Submit' class='myButton')
-    script(src='/jquery/jquery.js')
-    script(type="text/javascript").
-        $('#playerform').submit(function(){
-              $('#submit').attr('disabled', 'disabled');
-              $('#playerform input').attr('readonly', 'readonly');
+  p
+  p
+  p
+  h1= 'Party Experience'
+  form(id='partyform,' method='post', action='/controlpanel/party')
+    table
+      thead
+        tr.head
+          th Current Level
+          th Current Experience
+          th Experience to Next Level
+      tbody
+        tr()
+          td #{party.level}
+          td
+            input(name="party[experience]" class='xp' type='number' step='100' value=party.current_xp)
+          td #{party.next_xp}
+    p
+    input(id='submit_xp' type='submit' value='Submit' class='myButton')
+
+
+
+  script(src='/jquery/jquery.js')
+  script(type="text/javascript").
+      $('#playerform').submit(function(){
+            $(':submit').attr('disabled', 'disabled');
+            $('input').attr('readonly', 'readonly');
+            return true;
+          }
+      )
+  script(type="text/javascript").
+      $('#partyform').submit(function () {
+              $(':submit').attr('disabled', 'disabled');
+              $('input').attr('readonly', 'readonly');
               return true;
-            }
-        )
+          }
+      )
 

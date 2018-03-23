@@ -1,11 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var playerDataAccess = require('../dataaccess/players');
+var partyDataAccess = require('../dataaccess/party');
 
 /* GET control panel - this page allows a user to update player status. */
 router.get('/', function(req, res, next) {
   var players = playerDataAccess.getPlayerStatus( (players)=>{
-    res.render('controlpanel', {title: 'Player Status', players: players});
+    var party = partyDataAccess.getPartyStatus((party)=>{
+        res.render('controlpanel', {title: 'Player Status', players: players, party: party});
+    })
   })
 });
 
@@ -26,5 +29,18 @@ router.post('/', function(req, res, next) {
       });
     }
 });
+
+/* POST control panel - this is called on submitting the form and updates player status */
+router.post('/party', function(req, res, next) {
+    console.log(req.body);
+    var party = req.body.party;
+    var experience = party.experience;
+
+    partyDataAccess.updatePartyExperience(experience, ()=>{
+        console.log('updated party experience');
+        res.redirect('back');
+    });
+});
+
 
 module.exports = router;

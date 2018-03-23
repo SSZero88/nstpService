@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  p= error
+  div
+    progress(data-label='#{party.current_xp} / #{party.next_xp}',class='xp', value=party.percent, max=100)
+    script(type="text/javascript").
+        window.setTimeout("window.location.reload(true);", 5000);
+
+
+
