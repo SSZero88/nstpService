@@ -10,7 +10,7 @@ var index = require('./routes/index');
 var players = require('./routes/players')
 var controlpanel = require('./routes/controlpanel');
 
-
+// todo: hide the password and connection info
 connection = mysql.createConnection({
     host     : "aa1tbgdjsdcvgkw.c3rybqe7urki.us-east-1.rds.amazonaws.com",
     user     : "sseeley",
