@@ -5,8 +5,12 @@ block content
   p= error
   div
     progress(data-label='#{party.current_xp} / #{party.next_xp}',class='xp', value=party.percent, max=100)
+    script(src='/jquery/jquery.js')
     script(type="text/javascript").
-        window.setTimeout("window.location.reload(true);", 5000);
-
-
-
+        var refreshTimeout;
+        jQuery(window).focus(function(){
+            refreshTimeout = window.setTimeout("window.location.reload(true);", 5000);
+        })
+        jQuery(window).blur(function() {
+            window.clearTimeout(refreshTimeout);
+        });
