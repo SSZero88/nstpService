@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="samplestyle.css">
+    <meta charset="UTF-8">
+    <title>Experience Bar Sample</title>
+</head>
+<body>
+<div><progress id="xpbar" data-label="10000 / 15000" value="80" max="100" class="xp"></progress></div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        // every 5 seconds, query the party experience,
+        // and update the bar
+        window.setInterval(function(){
+            console.log("it works!");
+            $.ajax({
+                url: "http://localhost:8888/party/experience",
+                success: function(result){
+                    console.log(result);
+                    updateProgressBar(result);
+                }
+            });
+        }, 5000);
+    });
+
+    /**
+     * Updates the progress bar
+     * @param party
+     */
+    function updateProgressBar(party){
+        var prev = party.prev_xp;
+        var current = party.current_xp;
+        var next = party.next_xp;
+        var level = party.level;
+        var percent = party.percent;
+        $("#xpbar").attr("data-label", current+" / "+next)
+        $("#xpbar").val(percent);
+    }
+
+</script>
+</html>
