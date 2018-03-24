@@ -9,6 +9,7 @@ var mysql = require('mysql');
 var index = require('./routes/index');
 var players = require('./routes/players')
 var controlpanel = require('./routes/controlpanel');
+var party = require('./routes/party');
 
 // todo: hide the password and connection info
 connection = mysql.createConnection({
@@ -43,6 +44,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/party', party);
 app.use('/players', players);
 app.use('/controlpanel', controlpanel);
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
